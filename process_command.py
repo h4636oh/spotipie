@@ -13,7 +13,10 @@ controller = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=CLIENT_ID, clie
 ))
 
 def process_command(command):
-    action = command.action
+    try:
+        action = command.action
+    except:
+        print("failed")
 
     if action == "play":
         if command.playType == "song" and command.song:
