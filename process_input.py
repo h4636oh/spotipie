@@ -1,5 +1,4 @@
-import os
-import json
+import os, prompt
 from openai import OpenAI
 from enum import Enum
 from typing import Optional
@@ -57,8 +56,8 @@ def process_input(command):
     response = client.beta.chat.completions.parse(
     model="gpt-4o-mini",
     messages=[
-        {"role": "system", "content": "You are an assistant that extracts structured data from user input."},
-        {"role": "user", "content": f"Convert this command into structured data: {command}"}
+        {"role": "system", "content": f"{prompt.prompt_for_system}"},
+        {"role": "user", "content": f"{prompt.prompt_for_user}: {command}"}
     ],
     response_format=SpotifyActions,
     )
